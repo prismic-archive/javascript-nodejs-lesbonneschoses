@@ -1,0 +1,54 @@
+<% layout('main') -%>
+
+<div class="main" id="jobs">
+
+  <section id="page-header">
+
+    <div style="background-image: url(<%= page.getImageView('article.image', 'main').url %>)">
+      <div>
+        <h1><%= page.getText('article.title') %></h1>
+
+        <%- page.getHtml('article.short_lede', ctx.linkResolver) %>
+      </div>
+    </div>
+
+  </section>
+
+  <section id="page-body">
+    
+    <div class="presentation">
+      <%= page.getHtml("article.content", ctx.linkResolver) %>
+    </div>
+
+    <% var services = {
+      "Store": "Positions in our Stores",
+      "Office": "Positions in our Offices",
+      "Workshop": "Positions in our Workshops",
+      "undefined": "Other positions"
+    }; %>
+
+    <% _.chain(jobs).groupBy(function(j) { return j.getText('job-offer.service'); }).pairs().map(function(serviceWithJobs) { %> 
+
+      <h2><%= services[serviceWithJobs[0]] %></h2>
+
+      <div class="listing">
+        <% _(serviceWithJobs[1]).map(function(job) { %> 
+
+          <div class="job">
+            <a href="/jobs/<%= job.id %>/<%= job.slug %><%= ctx.maybeRef ? '?ref=' + ctx.maybeRef : '' %>">
+              <h3><%= job.getText("job-offer.name") %></h3>
+              <p>
+                <%= job.getStructuredText("job-offer.profile").getFirstParagraph().text %>
+              </p>
+              <strong>Learn more</strong>
+            </a>
+          </div>
+
+        <% }); %>
+      </div>
+
+    <% }); %>
+
+  </section>
+
+</div>

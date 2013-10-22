@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <title>Les bonnes choses</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+
+    <link rel="stylesheet" href="/stylesheets/normalize.min.css">
+    <link rel="stylesheet" href="/stylesheets/blog.css">
+    <link rel="stylesheet" href="/stylesheets/toolbar.css">
+
+  </head>
+  <body>
+
+    <%- partial('toolbar') %>
+
+    <header>
+
+      <a href="/<%= ctx.maybeRef ? '?ref=' + ctx.maybeRef : '' %>">
+        <h1>Les Bonnes Choses</h1>
+      </a>
+
+      <nav>
+        <ul>
+          <li><a href="/blog<%= ctx.maybeRef ? '?ref=' + ctx.maybeRef : '' %>">Home</a></li>
+          <% _(categories).map(function(category) { %> 
+            <li><a href="/blog/categories/<%= category %><%= ctx.maybeRef ? '?ref=' + ctx.maybeRef : '' %>"><%= category %></a></li>
+          <% }); %>
+        </ul>
+      </nav>
+
+    </header>
+
+    <%- body -%>
+
+    <footer>
+      This is a demonstration website for <a href="http://prismic.io">prismic.io</a> 
+
+      <% if(!ctx.oauth().hasPrivilegedAccess) { %>
+        – Please <a href="/#signin">sign in</a> to preview your changes.
+      <% } %>
+    </footer>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/javascripts/jquery-1.10.1.min.js><\/script>')</script>
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+
+    <script src="/javascripts/modernizr-2.6.2.min.js"></script>
+  </body>
+</html>

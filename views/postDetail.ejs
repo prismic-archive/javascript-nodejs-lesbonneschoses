@@ -1,0 +1,74 @@
+<% layout('blog') -%>
+
+<div class="main" id="postDetail">
+
+  <section id="post">
+    
+      <em class="infos"><%= moment(post.getDate("blog-post.date")).format('MMMM DD, YYYY') %> by <%= post.getText("blog-post.author") %></em>
+      
+      <article>
+        <%- post.getHtml("blog-post.body", ctx.linkResolver) %>
+      </article>
+
+      <% if(relatedPosts.length > 0) { %> 
+
+        <h2><% if(relatedPosts.length == 1) { %> 
+            This
+          <% } else { %> 
+            These
+          <% } %> should interest you too
+        </h2>
+
+        <ul>
+          <% _.map(relatedPosts, function(post) { %> 
+            <li>
+              <a href="/blog/posts/<%= post.id %>/<%= post.slug %><%= ctx.maybeRef ? '?ref=' + ctx.maybeRef : '' %>">
+                <%= post.getStructuredText('blog-post.body').getTitle().text %>
+              </a>
+            </li>
+          <% }); %>
+        </ul>
+
+      <% } %>
+
+      <% if(post.getBoolean('blog-post.allow_comments')) { %> 
+
+        <h2>Comments</h2>
+
+        <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+
+        <div class="fb-comments" data-href="<%= ctx.linkResolver(post) %>" data-width="640" data-num-posts="10"></div>
+
+      <% } %>
+
+  </section>
+
+  <aside>
+
+    <% if(relatedProducts.length > 0) { %> 
+
+      <h2>Some pastries you should love</h2>
+
+      <ul>
+        <% _.map(relatedProducts, function(product) { %> 
+          <li>
+            <a href="/products/<%= product.id %>/<%= product.slug %><%= ctx.maybeRef ? '?ref=' + ctx.maybeRef : '' %>">
+              <img src="<%= product.getImageView("product.image", "icon").url %>">
+              <span><%= product.getText("product.name") %></span>
+            </a>
+          </li>
+        <% }); %>
+      </ul>
+
+    <% } %>
+
+  </aside>
+
+</div>

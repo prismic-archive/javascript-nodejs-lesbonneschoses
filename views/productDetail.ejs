@@ -1,0 +1,77 @@
+<% layout('main') -%>
+
+<div class="main" id="product">
+
+  <section id="detail">
+
+    <div>
+
+      <img src="<%= product.getImageView('product.image', 'main').url %>">
+
+      <h4>
+        <strong><%= product.getText('product.name') %></strong>
+        <em><%= numeral(product.getNumber('product.price')).format('$ 0,0[.]00') %></em>
+      </h4>
+      
+      <h2>
+        <%= product.getText('product.short_lede') %>
+      </h2>
+
+      <%- product.getHtml('product.description', ctx.linkResolver) %>
+
+      <p>
+        <a href="/flavours/<%= product.getText('product.flavour') %><%= ctx.maybeRef ? '?ref=' + ctx.maybeRef : '' %>">
+          <strong class="color" style="background: <%= product.getText('product.color') %>"><%= product.getText('product.color') %></strong>
+        </a>
+      </p>
+
+    </div>
+
+    <p>
+      <a href="/products<%= ctx.maybeRef ? '?ref=' + ctx.maybeRef : '' %>">Browse all our products</a>
+    </p>
+
+  </section>
+
+  <% if(product.getImageView('product.gallery', 'main')) { %> 
+
+    <section id="gallery" style="background-image: url(<%= product.getImageView('product.gallery', 'main').url %>)"></section>
+
+  <% } else { %> 
+
+    <% if(product.getText("product.testimonial_quote")) { %> 
+      <section id="quote">
+        <blockquote><%= product.getText("product.testimonial_quote") %> <strong>said <%= product.getText("product.testimonial_author") %></strong></blockquote>
+      </section>
+    <% } %>
+    
+
+  <% } %>
+
+
+
+  <% if(relatedProducts.length) { %> 
+
+    <section id="related" class="products">
+
+      <h2>You might like these as well</h2> 
+
+      <ul>
+        <% _.each(relatedProducts, function(product) { %> 
+
+          <li data-category="<%= _.chain(product.tags).filter(function(t) { return _.chain(categories).keys().contains(t).value(); }).first().value() %>">
+            <a href="/products/<%= product.id %>/<%= product.slug %><%= ctx.maybeRef ? '?ref=' + ctx.maybeRef : '' %>">
+              <img src="<%= product.getImageView('product.image', 'icon').url %>">
+              <span><%= product.getText('product.name') %></span>
+              <em><%= numeral(product.getNumber('product.price')).format('$ 0,0[.]00') %></em>
+            </a>
+          </li>
+
+        <% }); %>
+      </ul>
+
+    </section>
+
+  <% } %>
+
+</div>

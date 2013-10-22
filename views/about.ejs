@@ -1,0 +1,21 @@
+<% layout('main') -%>
+
+<div class="main" id="about">
+
+  <section id="page-header">
+
+    <div style="background-image: url(<%= page.getImageView('article.image', 'main').url %>)">
+      <div>
+        <h1><%= page.getText('article.title') %></h1>
+
+        <%- page.getHtml('article.short_lede', ctx.linkResolver) %>
+      </div>
+    </div>
+
+  </section>
+
+  <section id="page-body">
+    <%- page.getHtml('article.content', ctx.linkResolver) %>
+  </section>
+
+</div>

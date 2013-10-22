@@ -1,0 +1,56 @@
+#toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: #00AFF1;
+  z-index: 10000;
+  font-family: Arial, Sans;
+}
+
+#toolbar form {
+  position: relative;
+  width: 1024px;
+  margin: 0 auto;
+  line-height: 40px;
+  font-size: 14px;
+  color: #fff;
+}
+
+#toolbar form input[type=submit] {
+  position: absolute;
+  top: 5px;
+  right: 0px;
+  width: 30px;
+  height: 30px;
+  opacity: 0;
+  border: none;
+  color: #00AFF1;
+  background: #00AFF1;
+  transition: .1s;
+}
+
+#toolbar form:last-child {
+  margin-top: -40px;
+}
+
+#toolbar form:last-child input[type=submit]:hover {
+  opacity: .15;
+}
+
+#toolbar form:last-child::before {
+  content: '\e805';
+  font-family: Fontello;
+  font-weight: 100;
+  font-size: 18px;
+  display: block;
+  position: absolute;
+  top: 5px;
+  right: 0px;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  color: #fff;
+}

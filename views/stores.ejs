@@ -1,0 +1,32 @@
+<% layout('main') -%>
+
+<div class="main" id="stores">
+
+  <section id="page-header">
+
+    <div style="background-image: url(<%= page.getImageView('article.image', 'main').url %>)">
+      <div>
+        <h1><%= page.getText('article.title') %></h1>
+
+        <%- page.getHtml('article.short_lede', ctx.linkResolver) %>
+      </div>
+    </div>
+
+  </section>
+
+  <section id="page-body">
+    <%- page.getHtml('article.content', ctx.linkResolver) %>
+
+    <% _.chain(stores).sortBy(function(s) { return s.getText('store.name'); }).map(function(store) { %> 
+
+      <article class="store" style="background-image: url(<%= store.getImageView('store.image', 'medium').url %>)">
+        <a href="/stores/<%= store.id %>/<%= store.slug %><%= ctx.maybeRef ? '?ref=' + ctx.maybeRef : '' %>">
+          <h3><%= store.getText('store.name') %></h3>
+        </a>
+      </article>
+
+    <% }).value(); %>
+
+  </section>
+
+</div>

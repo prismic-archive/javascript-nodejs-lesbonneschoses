@@ -1,0 +1,146 @@
+<% layout('main') -%>
+
+<div class="main" id="search">
+
+  <section>
+
+    <form>
+      <input type="text" name="query" placeholder="Search anything" value="<%= query %>" autocomplete="off">
+      <input type="submit" value="Submit">
+    </form>
+
+  </section>
+
+  <section>
+
+    <% if(query && products.length > 0) { %> 
+
+      <div id="product-results" class="products">
+
+        <h2>We have <% if(products.length == 1) { %> 
+            one product
+          <% } else { %> 
+            <%= products.length %> products
+          <% } %> 
+          matching your request
+        </h2>
+
+        <ul>
+          <% _.map(products, function(product) { %> 
+
+            <% if(product.type == 'product') { %> 
+
+              <li>
+                <a href="#products<%= ctx.maybeRefParam %>/<%= product.id %>/<%= product.slug %>">
+                  <img src="<%= product.getImageView("product.image", "icon").url %>">
+                  <span><%= product.getText("product.name") %></span>
+                </a>
+              </li>
+
+            <% } else { %>
+
+              <li>
+                <a href="#selections<%= ctx.maybeRefParam %>/<%= product.id %>/<%= product.slug %>">
+                  <img src="<%= product.getImageView("selection.image", "icon").url %>">
+                  <span><%= product.getText("selection.name") %></span>
+                </a>
+              </li>
+
+            <% } %>
+
+          <% }); %>
+
+        </ul>
+
+      </div>
+
+    <% } %>
+
+    <% if(query && others.length > 0) { %> 
+
+      <% 
+        var excerpt = function(text) {
+          var truncated = _.chain(_.take(text, 500).join('').split(/\s/)).initial().take(50).value().join(' ');
+          return truncated + (truncated != text ? '...' : '');
+        };
+      %>
+
+      <div id="other-results">
+
+        <h2><% if(others.length == 1) { %> 
+            One relevant article
+          <% } else { %> 
+            <%= others.length %> relevant articles
+          <% } %> 
+          in our Website
+        </h2>
+
+        <% _.map(others, function(doc) { %> 
+
+          <% if(doc.type == 'article') { %> 
+
+            <article>
+              <a href="<%= ctx.linkResolver(doc) %>">
+                <h3><%= doc.getText("article.title") %></h3>
+                <em><%= ctx.linkResolver(doc) %></em>
+                <p><%= excerpt(doc.getText("article.content")) %></p>
+              </a>
+            </article>
+
+          <% } %>
+
+          <% if(doc.type == 'store') { %> 
+
+            <article>
+              <a href="<%= ctx.linkResolver(doc) %>">
+                <h3>Les Bonnes Choses Store – <%= doc.getText("store.name") %></h3>
+                <em><%= ctx.linkResolver(doc) %></em>
+                <p>
+                  <%= doc.getText("store.address") %>
+                  <%= doc.getText("store.address2") %>
+                  <%= doc.getText("store.city") %>
+                  <%= doc.getText("store.zipcode") %>
+                  <%= doc.getText("store.country") %>
+                </p>
+              </a>
+            </article>
+
+          <% } %>
+
+          <% if(doc.type == 'job-offer') { %> 
+
+            <article>
+              <a href="<%= ctx.linkResolver(doc) %>">
+                <h3>Join us – <%= doc.getText("job-offer.name") %></h3>
+                <em><%= ctx.linkResolver(doc) %></em>
+                <p><%= excerpt(doc.getText("job-offer.profile")) %></p>
+              </a>
+            </article>
+
+          <% } %>
+
+          <% if(doc.type == 'blog-post') { %> 
+
+            <article>
+              <a href="<%= ctx.linkResolver(doc) %>">
+                <h3>In our blog – <%= doc.getStructuredText("blog-post.body").getTitle().text %></h3>
+                <em><%= ctx.linkResolver(doc) %></em>
+                <p><%= excerpt(doc.getStructuredText("blog-post.body").getFirstParagraph().text) %></p>
+              </a>
+            </article>
+
+          <% } %>
+
+        <% }); %>
+
+      </div>
+
+    <% } %>
+
+  </section>
+
+
+
+
+
+</div>

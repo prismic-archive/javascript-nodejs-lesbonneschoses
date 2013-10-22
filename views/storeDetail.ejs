@@ -1,0 +1,46 @@
+<% layout('main') -%>
+
+<div class="main" id="store">
+
+  <section id="page-header">
+
+    <div style="background-image: url(<%= store.getImageView('store.image', 'main').url %>)">
+      <div>
+        <h1><%= store.getText('store.name') %></h1>
+
+        <%- store.getHtml('store.description', ctx.linkResolver) %>
+      </div>
+    </div>
+
+  </section>
+
+  <section id="page-body">
+    
+    <div id="map-canvas" style="width:400px; height: 300px"></div>
+
+    <p class="address">
+      <%- store.getText("store.address", '<br>') %>
+      <%- store.getText("store.address2", '<br>') %>
+      <%- store.getText("store.city") %>
+      <%- store.getText("store.zipcode", '<br>') %>
+      <%- store.getText("store.country") %>
+    </p>  
+
+    <aside>
+
+      <h4>Opening times</h4>
+
+      <% _.each(["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], function(day) { %> 
+
+        <dl>
+          <dt><%= day %></dt>
+          <dd><%= store.getText('store.' + day.toLowerCase()) %></dd>
+        </dl>
+
+      <% }); %>
+
+    </aside>
+
+  </section>
+
+</div>

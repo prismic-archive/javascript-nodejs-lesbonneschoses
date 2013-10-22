@@ -1,0 +1,27 @@
+<% layout('main') -%>
+
+<div class="main" id="job">
+
+  <section id="page-header">
+
+    <div style="background-image: url(<%= page.getImageView('article.image', 'main').url %>)">
+      <div>
+        <h1><%= job.getText('job-offer.name') %></h1>
+      </div>
+    </div>
+
+  </section>
+
+  <section id="page-body">
+    
+    <h2>About you</h2>
+
+    <%- job.getHtml("job-offer.profile", ctx.linkResolver) %>
+
+    <h2>Your responsibilities</h2>
+
+    <%- job.getHtml("job-offer.job_description", ctx.linkResolver) %>
+
+  </section>
+
+</div>

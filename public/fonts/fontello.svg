@@ -1,0 +1,17 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg">
+<metadata>Copyright (C) 2012 by original authors @ fontello.com</metadata>
+<defs>
+<font id="fontello" horiz-adv-x="1000" >
+<font-face font-family="fontello" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
+<missing-glyph horiz-adv-x="1000" />
+<glyph glyph-name="star" unicode="&#xe803;" d="M929 489q0-12-15-27l-203-198 48-279q1-4 1-11 0-12-6-20t-17-8q-11 0-22 7l-251 132-251-132q-12-7-22-7-12 0-18 8t-6 20q0 3 1 11l48 279-203 198q-14 15-14 27 0 21 31 26l280 41 126 254q11 23 27 23t27-23l126-254 280-41q31-5 31-26z" horiz-adv-x="928.571" />
+<glyph glyph-name="cancel" unicode="&#xe802;" d="M654 349l346-346-154-154-346 346-346-346-154 154 346 346-346 346 154 154 346-346 346 346 154-154z" horiz-adv-x="1000" />
+<glyph glyph-name="right" unicode="&#xe804;" d="M350 680l380-330-380-330 0 192-350 0 0 278 350 0 0 190z" horiz-adv-x="730" />
+<glyph glyph-name="th" unicode="&#xe800;" d="M0-150l0 250 250 0 0-250-250 0z m0 375l0 250 250 0 0-250-250 0z m0 375l0 250 250 0 0-250-250 0z m375-750l0 250 250 0 0-250-250 0z m0 375l0 250 250 0 0-250-250 0z m0 375l0 250 250 0 0-250-250 0z m375-750l0 250 250 0 0-250-250 0z m0 375l0 250 250 0 0-250-250 0z m0 375l0 250 250 0 0-250-250 0z" horiz-adv-x="1000" />
+<glyph glyph-name="power" unicode="&#xe805;" d="M339 75q95 0 164 69t69 166q0 98-69 166-15 15-15 36t15 36 37 15 37-15q100-100 100-239 0-140-100-240-99-99-239-99-141 0-240 99t-99 240q0 140 99 239 15 15 37 15t37-15 15-36-15-36q-69-69-69-166 0-96 69-166t166-69z m0 291q-21 0-37 15t-16 36l0 261q0 21 16 36t37 15 36-15 15-36l0-261q0-21-15-36t-36-15z" horiz-adv-x="678" />
+<glyph glyph-name="search" unicode="&#xe801;" d="M772 78q30-34 6-62l-46-46q-36-32-68 0l-190 190q-74-42-156-42-128 0-223 95t-95 223 90 219 218 91 224-95 96-223q0-88-46-162z m-678 358q0-88 68-156t156-68 151 63 63 153q0 88-68 155t-156 67-151-63-63-151z" horiz-adv-x="789" />
+</font>
+</defs>
+</svg>
