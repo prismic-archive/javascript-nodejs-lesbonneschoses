@@ -88,7 +88,7 @@ exports.getBookmark = function(ctx, bookmark, callback) {
   } else {
     callback();
   }
-}
+};
 
 // -- Route wrapper that provide a "prismic context" to the underlying function
 

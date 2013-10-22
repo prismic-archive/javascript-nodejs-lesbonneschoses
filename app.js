@@ -64,5 +64,5 @@ app.post('/signout', prismic.signout);
 var PORT = process.env.PORT || 3000;
 
 http.createServer(app).listen(PORT, function() {
-  console.log('Express server listening on port ' + app.get('port'));
+  console.log('Express server listening on port ' + PORT);
 });
