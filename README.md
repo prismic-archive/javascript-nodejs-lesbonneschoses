@@ -24,7 +24,37 @@ You can also go to the _Applications_ panel in your repository settings, and cre
 
 ### Deploy your NodeJS application
 
+An easy way to deploy your NodeJS application is to use [Heroku](http://www.heroku.com). Just follow these few simple steps once you have successfully signed up and installed to Heroku toolchain:
 
+Create a `Procfile` file at your application root, to declare the server command:
+
+```
+web: node app.js
+```
+
+Create a new Heroku application
+
+```
+$ heroku create
+```
+
+Push your code to heroku:
+
+```
+$ git push heroku master
+```
+
+Ensure you have at least one node running:
+
+```
+$ heroku ps:scale web=1
+```
+
+You can now browse your application online:
+
+```
+$ heroku open
+```
 
 ### Licence
 
