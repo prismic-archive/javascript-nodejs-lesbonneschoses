@@ -15,7 +15,11 @@ exports.posts = prismic.route(function(req, res, ctx) {
 
   var category = req.params['category'];
 
-  ctx.api.form('blog').ref(ctx.ref).query(category ? '[[:d = at(my.blog-post.category, "' + category + '")]]' : '').submit(function(posts) {
+  var searchForm = ctx.api.form('blog').ref(ctx.ref);
+
+  if (category) searchForm.query('[[:d = at(my.blog-post.category, "' + category + '")]]');
+
+  searchForm.submit(function(posts) {
 
     res.render('posts', {
       posts: posts,
