@@ -1,60 +1,21 @@
 ## Les Bonnes Choses, JavaScript with NodeJS
 
-This is a example project made by the prismic.io team as a showcase to help developers get started. It consumes the content repository available at [https://lesbonneschoses.prismic.io/api](https://lesbonneschoses.prismic.io/api).
+This is a example project made by the prismic.io team as a showcase to help developers get started. By default, it consumes the content repository available at [https://lesbonneschoses.prismic.io/api](https://lesbonneschoses.prismic.io/api).
 
 You can also visit the public version hosted at [http://lesbonneschoses.prismic.me](http://lesbonneschoses.prismic.me).
 
-### Connect it to your own repository
+### Get started
 
-By the default, this application will consume the content from the original "Les Bonnes Choses" repository. You can also create your own fork of this content repository and use it instead.
+This project gets started and installed exactly like the FRAMEWORK starter project, you will find all information [in its README file](https://github.com/prismicio/javascript-nodejs-starter/blob/master/README.md).
 
-Once you have created your own "Les Bonnes Choses" repository from the prismic.io Dashboard, change the `apiEndpoint` in the `prismic-configuration.js` file:
+#### Connect it to your own Les Bonnes Choses repository
 
-```
-  apiEndpoint: 'https://lesbonneschoses-xxxxxx.prismic.io/api',
-```
+First, create your own Les Bonnes Choses content repository if you haven't: from your [prismic.io dashboard](https://prismic.io/dashboard/), click on the "Fork it now!" button in the "Fork the Les Bonnes Choses repository" frame.
 
-You can also go to the _Applications_ panel in your repository settings, and create an OAuth application to allow interactive sign-in. Just create a new application, fill the application name and the callback URL (`localhost` URLs are always authorized, so at development time you can omit to fill the Callback URL field), and copy/paste the `clientId` & `clientSecret` configuration to the `prismic-configuration.js` file:
+Then, configure the project as described in the "Configure" paragraph of [the starter project's README file](https://github.com/prismicio/javascript-nodejs-starter/blob/master/README.md).
 
-```
-  // OAuth
-  clientId: 'xxxxxx',
-  clientSecret: 'xxxxxx',
-```
+Now, you can change content in your EXAMPLE repository, and it will reflect in your local project.
 
-### Deploy your NodeJS application
-
-An easy way to deploy your NodeJS application is to use [Heroku](http://www.heroku.com). Just follow these few simple steps once you have successfully signed up and installed to Heroku toolchain:
-
-Create a `Procfile` file at your application root, to declare the server command:
-
-```
-web: node app.js
-```
-
-Create a new Heroku application
-
-```
-$ heroku create
-```
-
-Push your code to heroku:
-
-```
-$ git push heroku master
-```
-
-Ensure you have at least one node running:
-
-```
-$ heroku ps:scale web=1
-```
-
-You can now browse your application online:
-
-```
-$ heroku open
-```
 
 ### Licence
 
