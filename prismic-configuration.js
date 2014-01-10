@@ -41,6 +41,10 @@ exports.Configuration = {
       return '/blog/posts/' + doc.id + '/' + doc.slug + (ctx.maybeRef ? '?ref=' + ctx.maybeRef : '');;
     }
 
+    if(doc.type == 'selection' && !doc.isBroken) {
+      return '/selections/' + doc.id + '/' + doc.slug + (ctx.maybeRef ? '?ref=' + ctx.maybeRef : '');;
+    }
+
   }
 
 };

@@ -31,7 +31,7 @@
             <% if(product.type == 'product') { %> 
 
               <li>
-                <a href="#products<%= ctx.maybeRefParam %>/<%= product.id %>/<%= product.slug %>">
+                <a href="<%= ctx.linkResolver(ctx, product) %>">
                   <img src="<%= product.getImageView("product.image", "icon").url %>">
                   <span><%= product.getText("product.name") %></span>
                 </a>
@@ -40,7 +40,7 @@
             <% } else { %>
 
               <li>
-                <a href="#selections<%= ctx.maybeRefParam %>/<%= product.id %>/<%= product.slug %>">
+                <a href="<%= ctx.linkResolver(ctx, product) %>">
                   <img src="<%= product.getImageView("selection.image", "icon").url %>">
                   <span><%= product.getText("selection.name") %></span>
                 </a>

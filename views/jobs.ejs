@@ -35,7 +35,7 @@
         <% _(serviceWithJobs[1]).map(function(job) { %> 
 
           <div class="job">
-            <a href="/jobs/<%= job.id %>/<%= job.slug %><%= ctx.maybeRef ? '?ref=' + ctx.maybeRef : '' %>">
+            <a href="<%= ctx.linkResolver(ctx, job) %>">
               <h3><%= job.getText("job-offer.name") %></h3>
               <p>
                 <%= job.getStructuredText("job-offer.profile").getFirstParagraph().text %>

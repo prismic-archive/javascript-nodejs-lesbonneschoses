@@ -20,7 +20,7 @@
     <% _.chain(stores).sortBy(function(s) { return s.getText('store.name'); }).map(function(store) { %> 
 
       <article class="store" style="background-image: url(<%= store.getImageView('store.image', 'medium').url %>)">
-        <a href="/stores/<%= store.id %>/<%= store.slug %><%= ctx.maybeRef ? '?ref=' + ctx.maybeRef : '' %>">
+        <a href="<%= ctx.linkResolver(ctx, store) %>">
           <h3><%= store.getText('store.name') %></h3>
         </a>
       </article>
