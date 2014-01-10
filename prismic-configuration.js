@@ -10,7 +10,8 @@ exports.Configuration = {
   // clientSecret: 'xxxxxx',
 
   // -- Links resolution rules
-  linkResolver: function(ctx, doc, isBroken) {
+  linkResolver: function(ctx, doc) {
+    if (doc.isBroken) return false;
 
     if(doc.id == ctx.api.bookmarks['about']) {
       return '/about' + (ctx.maybeRef ? '?ref=' + ctx.maybeRef : '');

@@ -44,7 +44,7 @@
           fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));</script>
 
-        <div class="fb-comments" data-href="<%= ctx.linkResolver(post) %>" data-width="640" data-num-posts="10"></div>
+        <div class="fb-comments" data-href="<%= ctx.linkResolver(ctx, post) %>" data-width="640" data-num-posts="10"></div>
 
       <% } %>
 
