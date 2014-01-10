@@ -76,6 +76,12 @@ exports.postDetail = prismic.route(function(req, res, ctx) {
 
     );
 
+  },
+  function(doc) {
+    res.redirect(302, ctx.linkResolver(ctx, doc));
+  },
+  function(NOT_FOUND) {
+    res.send(404, 'Sorry, we cannot find this blog post!');
   });
 
 });
