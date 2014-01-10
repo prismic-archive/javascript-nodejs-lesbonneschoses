@@ -21,7 +21,7 @@
     <img src="<%= selection.getImageView("selection.image", "main").url %>">
 
     <div>
-      <%- selection.getHtml("selection.description", ctx.linkResolver) %>
+      <%- selection.getHtml("selection.description", ctx) %>
 
       <h4>
         <em><%= numeral(selection.getNumber('selection.price')).format('$ 0,0[.]00') %></em>

@@ -7,7 +7,7 @@
       <em class="infos"><%= moment(post.getDate("blog-post.date")).format('MMMM DD, YYYY') %> by <%= post.getText("blog-post.author") %></em>
       
       <article>
-        <%- post.getHtml("blog-post.body", ctx.linkResolver) %>
+        <%- post.getHtml("blog-post.body", ctx) %>
       </article>
 
       <% if(relatedPosts.length > 0) { %> 

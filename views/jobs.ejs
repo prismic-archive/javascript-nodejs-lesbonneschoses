@@ -8,7 +8,7 @@
       <div>
         <h1><%= page.getText('article.title') %></h1>
 
-        <%- page.getHtml('article.short_lede', ctx.linkResolver) %>
+        <%- page.getHtml('article.short_lede', ctx) %>
       </div>
     </div>
 
@@ -17,7 +17,7 @@
   <section id="page-body">
     
     <div class="presentation">
-      <%= page.getHtml("article.content", ctx.linkResolver) %>
+      <%= page.getHtml("article.content", ctx) %>
     </div>
 
     <% var services = {

@@ -17,7 +17,7 @@
         <%= product.getText('product.short_lede') %>
       </h2>
 
-      <%- product.getHtml('product.description', ctx.linkResolver) %>
+      <%- product.getHtml('product.description', ctx) %>
 
       <p>
         <a href="/flavours/<%= product.getText('product.flavour') %><%= ctx.maybeRef ? '?ref=' + ctx.maybeRef : '' %>">
