@@ -25,19 +25,19 @@ exports.Configuration = {
       return '/stores' + (ctx.maybeRef ? '?ref=' + ctx.maybeRef : '');
     }
 
-    if(doc.type == 'store' && !isBroken) {
+    if(doc.type == 'store' && !doc.isBroken) {
       return '/stores/' + doc.id + '/' + doc.slug + (ctx.maybeRef ? '?ref=' + ctx.maybeRef : '');;
     }
 
-    if(doc.type == 'product' && !isBroken) {
+    if(doc.type == 'product' && !doc.isBroken) {
       return '/products/' + doc.id + '/' + doc.slug + (ctx.maybeRef ? '?ref=' + ctx.maybeRef : '');;
     }
 
-    if(doc.type == 'job-offer' && !isBroken) {
+    if(doc.type == 'job-offer' && !doc.isBroken) {
       return '/jobs/' + doc.id + '/' + doc.slug + (ctx.maybeRef ? '?ref=' + ctx.maybeRef : '');;
     }
 
-    if(doc.type == 'blog-post' && !isBroken) {
+    if(doc.type == 'blog-post' && !doc.isBroken) {
       return '/blog/posts/' + doc.id + '/' + doc.slug + (ctx.maybeRef ? '?ref=' + ctx.maybeRef : '');;
     }
 
