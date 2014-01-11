@@ -31,7 +31,7 @@
             <% if(product.type == 'product') { %> 
 
               <li>
-                <a href="#products<%= ctx.maybeRefParam %>/<%= product.id %>/<%= product.slug %>">
+                <a href="<%= ctx.linkResolver(ctx, product) %>">
                   <img src="<%= product.getImageView("product.image", "icon").url %>">
                   <span><%= product.getText("product.name") %></span>
                 </a>
@@ -40,7 +40,7 @@
             <% } else { %>
 
               <li>
-                <a href="#selections<%= ctx.maybeRefParam %>/<%= product.id %>/<%= product.slug %>">
+                <a href="<%= ctx.linkResolver(ctx, product) %>">
                   <img src="<%= product.getImageView("selection.image", "icon").url %>">
                   <span><%= product.getText("selection.name") %></span>
                 </a>
@@ -80,9 +80,9 @@
           <% if(doc.type == 'article') { %> 
 
             <article>
-              <a href="<%= ctx.linkResolver(doc) %>">
+              <a href="<%= ctx.linkResolver(ctx, doc) %>">
                 <h3><%= doc.getText("article.title") %></h3>
-                <em><%= ctx.linkResolver(doc) %></em>
+                <em><%= ctx.linkResolver(ctx, doc) %></em>
                 <p><%= excerpt(doc.getText("article.content")) %></p>
               </a>
             </article>
@@ -92,9 +92,9 @@
           <% if(doc.type == 'store') { %> 
 
             <article>
-              <a href="<%= ctx.linkResolver(doc) %>">
+              <a href="<%= ctx.linkResolver(ctx, doc) %>">
                 <h3>Les Bonnes Choses Store – <%= doc.getText("store.name") %></h3>
-                <em><%= ctx.linkResolver(doc) %></em>
+                <em><%= ctx.linkResolver(ctx, doc) %></em>
                 <p>
                   <%= doc.getText("store.address") %>
                   <%= doc.getText("store.address2") %>
@@ -110,9 +110,9 @@
           <% if(doc.type == 'job-offer') { %> 
 
             <article>
-              <a href="<%= ctx.linkResolver(doc) %>">
+              <a href="<%= ctx.linkResolver(ctx, doc) %>">
                 <h3>Join us – <%= doc.getText("job-offer.name") %></h3>
-                <em><%= ctx.linkResolver(doc) %></em>
+                <em><%= ctx.linkResolver(ctx, doc) %></em>
                 <p><%= excerpt(doc.getText("job-offer.profile")) %></p>
               </a>
             </article>
@@ -122,9 +122,9 @@
           <% if(doc.type == 'blog-post') { %> 
 
             <article>
-              <a href="<%= ctx.linkResolver(doc) %>">
+              <a href="<%= ctx.linkResolver(ctx, doc) %>">
                 <h3>In our blog – <%= doc.getStructuredText("blog-post.body").getTitle().text %></h3>
-                <em><%= ctx.linkResolver(doc) %></em>
+                <em><%= ctx.linkResolver(ctx, doc) %></em>
                 <p><%= excerpt(doc.getStructuredText("blog-post.body").getFirstParagraph().text) %></p>
               </a>
             </article>

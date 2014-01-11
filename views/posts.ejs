@@ -7,7 +7,7 @@
     <% _.chain(posts).take(10).map(function(post) { %> 
 
       <article>
-        <a href="/blog/posts/<%= post.id %>/<%= post.slug %><%= ctx.maybeRef ? '?ref=' + ctx.maybeRef : '' %>">
+        <a href="<%= ctx.linkResolver(ctx, post) %>">
           <em class="infos"><%= moment(post.getDate("blog-post.date")).format("MMMM DD, YYYY") %> by <%= post.getText("blog-post.author") %></em>
           <h2><%= post.getStructuredText("blog-post.body").getTitle().text %></h2>
           

@@ -7,7 +7,7 @@
       <em class="infos"><%= moment(post.getDate("blog-post.date")).format('MMMM DD, YYYY') %> by <%= post.getText("blog-post.author") %></em>
       
       <article>
-        <%- post.getHtml("blog-post.body", ctx.linkResolver) %>
+        <%- post.getHtml("blog-post.body", ctx) %>
       </article>
 
       <% if(relatedPosts.length > 0) { %> 
@@ -22,7 +22,7 @@
         <ul>
           <% _.map(relatedPosts, function(post) { %> 
             <li>
-              <a href="/blog/posts/<%= post.id %>/<%= post.slug %><%= ctx.maybeRef ? '?ref=' + ctx.maybeRef : '' %>">
+              <a href="<%= ctx.linkResolver(ctx, post) %>">
                 <%= post.getStructuredText('blog-post.body').getTitle().text %>
               </a>
             </li>
@@ -44,7 +44,7 @@
           fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));</script>
 
-        <div class="fb-comments" data-href="<%= ctx.linkResolver(post) %>" data-width="640" data-num-posts="10"></div>
+        <div class="fb-comments" data-href="<%= ctx.linkResolver(ctx, post) %>" data-width="640" data-num-posts="10"></div>
 
       <% } %>
 
@@ -59,7 +59,7 @@
       <ul>
         <% _.map(relatedProducts, function(product) { %> 
           <li>
-            <a href="/products/<%= product.id %>/<%= product.slug %><%= ctx.maybeRef ? '?ref=' + ctx.maybeRef : '' %>">
+            <a href="<%= ctx.linkResolver(ctx, product) %>">
               <img src="<%= product.getImageView("product.image", "icon").url %>">
               <span><%= product.getText("product.name") %></span>
             </a>

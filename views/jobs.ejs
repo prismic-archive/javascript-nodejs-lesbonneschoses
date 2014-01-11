@@ -8,7 +8,7 @@
       <div>
         <h1><%= page.getText('article.title') %></h1>
 
-        <%- page.getHtml('article.short_lede', ctx.linkResolver) %>
+        <%- page.getHtml('article.short_lede', ctx) %>
       </div>
     </div>
 
@@ -17,7 +17,7 @@
   <section id="page-body">
     
     <div class="presentation">
-      <%= page.getHtml("article.content", ctx.linkResolver) %>
+      <%= page.getHtml("article.content", ctx) %>
     </div>
 
     <% var services = {
@@ -35,7 +35,7 @@
         <% _(serviceWithJobs[1]).map(function(job) { %> 
 
           <div class="job">
-            <a href="/jobs/<%= job.id %>/<%= job.slug %><%= ctx.maybeRef ? '?ref=' + ctx.maybeRef : '' %>">
+            <a href="<%= ctx.linkResolver(ctx, job) %>">
               <h3><%= job.getText("job-offer.name") %></h3>
               <p>
                 <%= job.getStructuredText("job-offer.profile").getFirstParagraph().text %>
