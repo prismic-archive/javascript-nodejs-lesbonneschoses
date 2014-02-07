@@ -45,6 +45,10 @@ exports.Configuration = {
       return '/selections/' + doc.id + '/' + doc.slug + (ctx.maybeRef ? '?ref=' + ctx.maybeRef : '');;
     }
 
+  },
+
+  onPrismicError: function(err, req, res) {
+    res.send(500, "Error 500: "+err.message);
   }
 
 };

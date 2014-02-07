@@ -13,10 +13,12 @@ var categories = {
 exports.home = prismic.route(function(req, res, ctx) {
 
   // Query the `products` collection
-  ctx.api.form('products').ref(ctx.ref).submit(function(products) {
+  ctx.api.form('products').ref(ctx.ref).submit(function(err, products) {
+    if (err) { prismic.onPrismicError(err, req, res); return; }
 
     // Query the `featured` collection
-    ctx.api.form('featured').ref(ctx.ref).submit(function(featured) {
+    ctx.api.form('featured').ref(ctx.ref).submit(function(err, featured) {
+      if (err) { prismic.onPrismicError(err, req, res); return; }
 
       res.render('home', {
         products: products,
@@ -35,7 +37,8 @@ exports.home = prismic.route(function(req, res, ctx) {
 exports.products = prismic.route(function(req, res, ctx) {
 
   // Query the `products` collection
-  ctx.api.form('products').ref(ctx.ref).submit(function(products) {
+  ctx.api.form('products').ref(ctx.ref).submit(function(err, products) {
+    if (err) { prismic.onPrismicError(err, req, res); return; }
 
     res.render('products', {
       products: products,
@@ -55,7 +58,8 @@ exports.productDetail = prismic.route(function(req, res, ctx) {
 
   // Retrieve the product document
   prismic.getDocument(ctx, id, slug, 
-    function(product) {
+    function(err, product) {
+      if (err) { prismic.onPrismicError(err, req, res); return; }
 
       // Retrieve the related products
       prismic.getDocuments(ctx,
