@@ -15,7 +15,9 @@ exports.posts = prismic.route(function(req, res, ctx) {
 
   var category = req.params['category'];
 
-  ctx.api.form('blog').ref(ctx.ref).query(category ? '[[:d = at(my.blog-post.category, "' + category + '")]]' : '').submit(function(posts) {
+  ctx.api.form('blog').ref(ctx.ref).query(category ? '[[:d = at(my.blog-post.category, "' + category + '")]]' : '').submit(function(err, posts) {
+
+    if (err) { prismic.onPrismicError(err, req, res); return; }
 
     res.render('posts', {
       posts: posts,
@@ -33,7 +35,9 @@ exports.postDetail = prismic.route(function(req, res, ctx) {
   var id = req.params['id'],
       slug = req.params['slug'];
 
-  prismic.getDocument(ctx, id, slug, function(post) {
+  prismic.getDocument(ctx, id, slug, function(err, post) {
+
+    if (err) { prismic.onPrismicError(err, req, res); return; }
 
     // Retrieve the related products
     prismic.getDocuments(ctx,
@@ -46,7 +50,9 @@ exports.postDetail = prismic.route(function(req, res, ctx) {
       }).filter(function(link) { return link; })).value(), 
 
       // Then
-      function(relatedProducts) {
+      function(err, relatedProducts) {
+
+        if (err) { prismic.onPrismicError(err, req, res); return; }
 
         // Retrieve the related posts
         prismic.getDocuments(ctx,
@@ -59,7 +65,9 @@ exports.postDetail = prismic.route(function(req, res, ctx) {
           }).filter(function(link) { return link; })).value(), 
 
           // Then
-          function(relatedPosts) {
+          function(err, relatedPosts) {
+
+            if (err) { prismic.onPrismicError(err, req, res); return; }
 
             res.render('postDetail', {
               post: post,

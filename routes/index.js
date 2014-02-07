@@ -72,7 +72,8 @@ exports.productDetail = prismic.route(function(req, res, ctx) {
         }).filter(function(link) { return link; })).value(), 
 
         // Then
-        function(relatedProducts) {
+        function(err, relatedProducts) {
+          if (err) { prismic.onPrismicError(err, req, res); return; }
 
           res.render('productDetail', {
             product: product,
@@ -103,7 +104,9 @@ exports.selectionDetail = prismic.route(function(req, res, ctx) {
 
   // Retrieve the selection document
   prismic.getDocument(ctx, id, slug, 
-    function(selection) {
+    function(err, selection) {
+
+      if (err) { prismic.onPrismicError(err, req, res); return; }
 
       if(selection) {
 
@@ -118,7 +121,9 @@ exports.selectionDetail = prismic.route(function(req, res, ctx) {
           }).filter(function(link) { return link; })).value(), 
 
           // Then
-          function(products) {
+          function(err, products) {
+
+            if (err) { prismic.onPrismicError(err, req, res); return; }
 
             res.render('selectionDetail', {
               selection: selection,
@@ -163,9 +168,13 @@ exports.about = prismic.route(function(req, res, ctx) {
 exports.stores = prismic.route(function(req, res, ctx) {
 
   // Get the bookmarked document
-  prismic.getBookmark(ctx, 'stores', function(page) {
+  prismic.getBookmark(ctx, 'stores', function(err, page) {
 
-    ctx.api.form('stores').ref(ctx.ref).submit(function(stores) {
+    if (err) { prismic.onPrismicError(err, req, res); return; }
+
+    ctx.api.form('stores').ref(ctx.ref).submit(function(err, stores) {
+
+      if (err) { prismic.onPrismicError(err, req, res); return; }
 
       res.render('stores', {
         page: page,
@@ -188,7 +197,9 @@ exports.storeDetail = prismic.route(function(req, res, ctx) {
 
   // Retrieve the store document
   prismic.getDocument(ctx, id, slug, 
-    function(store) {
+    function(err, store) {
+
+      if (err) { prismic.onPrismicError(err, req, res); return; }
 
       res.render('storeDetail', {
         store: store,
@@ -211,9 +222,13 @@ exports.storeDetail = prismic.route(function(req, res, ctx) {
 exports.jobs = prismic.route(function(req, res, ctx) {
 
   // Get the bookmarked document
-  prismic.getBookmark(ctx, 'jobs', function(page) {
+  prismic.getBookmark(ctx, 'jobs', function(err, page) {
 
-    ctx.api.form('jobs').ref(ctx.ref).submit(function(jobs) {
+    if (err) { prismic.onPrismicError(err, req, res); return; }
+
+    ctx.api.form('jobs').ref(ctx.ref).submit(function(err, jobs) {
+
+      if (err) { prismic.onPrismicError(err, req, res); return; }
 
       res.render('jobs', {
         page: page,
@@ -232,14 +247,18 @@ exports.jobs = prismic.route(function(req, res, ctx) {
 exports.jobDetail = prismic.route(function(req, res, ctx) {
 
   // Get the bookmarked document
-  prismic.getBookmark(ctx, 'jobs', function(page) {
+  prismic.getBookmark(ctx, 'jobs', function(err, page) {
+
+    if (err) { prismic.onPrismicError(err, req, res); return; }
 
     var id = req.params['id'],
         slug = req.params['slug'];
 
     // Retrieve the job document
     prismic.getDocument(ctx, id, slug, 
-      function(job) {
+      function(err, job) {
+
+        if (err) { prismic.onPrismicError(err, req, res); return; }
 
         res.render('jobDetail', {
           page: page,
@@ -269,10 +288,14 @@ exports.search = prismic.route(function(req, res, ctx) {
   if(query) {
 
     // Search products
-    ctx.api.form('everything').query('[[:d = any(document.type, ["product", "selection"])][:d = fulltext(document, "' + query + '")]]').ref(ctx.ref).submit(function(products) {
+    ctx.api.form('everything').query('[[:d = any(document.type, ["product", "selection"])][:d = fulltext(document, "' + query + '")]]').ref(ctx.ref).submit(function(err, products) {
+
+      if (err) { prismic.onPrismicError(err, req, res); return; }
 
       // Search others
-      ctx.api.form('everything').query('[[:d = any(document.type, ["article", "blog-post", "job-offer", "store"])][:d = fulltext(document, "' + query + '")]]').ref(ctx.ref).submit(function(others) {
+      ctx.api.form('everything').query('[[:d = any(document.type, ["article", "blog-post", "job-offer", "store"])][:d = fulltext(document, "' + query + '")]]').ref(ctx.ref).submit(function(err, others) {
+
+        if (err) { prismic.onPrismicError(err, req, res); return; }
 
         res.render('search', {
           query: query,
