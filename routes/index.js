@@ -86,7 +86,7 @@ exports.productDetail = prismic.route(function(req, res, ctx) {
       );
     },
     function(doc) {
-      res.redirect(302, ctx.linkResolver(ctx, doc));
+      res.redirect(301, ctx.linkResolver(ctx, doc));
     },
     function(NOT_FOUND) {
       res.send(404, 'Sorry, we cannot find this product!');
@@ -138,7 +138,7 @@ exports.selectionDetail = prismic.route(function(req, res, ctx) {
 
     },
     function(doc) {
-      res.redirect(302, ctx.linkResolver(ctx, doc));
+      res.redirect(301, ctx.linkResolver(ctx, doc));
     },
     function(NOT_FOUND) {
       res.send(404, 'Sorry, we cannot find this selection!');
@@ -208,7 +208,7 @@ exports.storeDetail = prismic.route(function(req, res, ctx) {
 
     },
     function(doc) {
-      res.redirect(302, ctx.linkResolver(ctx, doc));
+      res.redirect(301, ctx.linkResolver(ctx, doc));
     },
     function(NOT_FOUND) {
       res.send(404, 'Sorry, we cannot find this store!');
@@ -268,7 +268,7 @@ exports.jobDetail = prismic.route(function(req, res, ctx) {
 
       },
       function(doc) {
-        res.redirect(302, ctx.linkResolver(ctx, doc));
+        res.redirect(301, ctx.linkResolver(ctx, doc));
       },
       function(NOT_FOUND) {
         res.send(404, 'Sorry, we cannot find this store!');
