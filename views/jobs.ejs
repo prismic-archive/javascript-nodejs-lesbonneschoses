@@ -27,7 +27,7 @@
       "undefined": "Other positions"
     }; %>
 
-    <% _.chain(jobs).groupBy(function(j) { return j.getText('job-offer.service'); }).pairs().map(function(serviceWithJobs) { %> 
+    <% _.chain(jobs.results).groupBy(function(j) { return j.getText('job-offer.service'); }).pairs().map(function(serviceWithJobs) { %> 
 
       <h2><%= services[serviceWithJobs[0]] %></h2>
 

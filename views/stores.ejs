@@ -17,7 +17,7 @@
   <section id="page-body">
     <%- page.getHtml('article.content', ctx) %>
 
-    <% _.chain(stores).sortBy(function(s) { return s.getText('store.name'); }).map(function(store) { %> 
+    <% _.chain(stores.results).sortBy(function(s) { return s.getText('store.name'); }).map(function(store) { %> 
 
       <article class="store" style="background-image: url(<%= store.getImageView('store.image', 'medium').url %>)">
         <a href="<%= ctx.linkResolver(ctx, store) %>">

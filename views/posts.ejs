@@ -4,7 +4,7 @@
 
   <section id="posts">
 
-    <% _.chain(posts).take(10).map(function(post) { %> 
+    <% _.chain(posts.results).take(10).map(function(post) { %> 
 
       <article>
         <a href="<%= ctx.linkResolver(ctx, post) %>">

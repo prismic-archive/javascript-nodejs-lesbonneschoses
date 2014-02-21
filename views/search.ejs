@@ -13,7 +13,7 @@
 
   <section>
 
-    <% if(query && products.length > 0) { %> 
+    <% if(query && products.results.length > 0) { %> 
 
       <div id="product-results" class="products">
 
@@ -26,7 +26,7 @@
         </h2>
 
         <ul>
-          <% _.map(products, function(product) { %> 
+          <% _.map(products.results, function(product) { %> 
 
             <% if(product.type == 'product') { %> 
 
@@ -56,7 +56,7 @@
 
     <% } %>
 
-    <% if(query && others.length > 0) { %> 
+    <% if(query && others.results.length > 0) { %> 
 
       <% 
         var excerpt = function(text) {
@@ -67,7 +67,7 @@
 
       <div id="other-results">
 
-        <h2><% if(others.length == 1) { %> 
+        <h2><% if(others.results.length == 1) { %> 
             One relevant article
           <% } else { %> 
             <%= others.length %> relevant articles
@@ -75,7 +75,7 @@
           in our Website
         </h2>
 
-        <% _.map(others, function(doc) { %> 
+        <% _.map(others.results, function(doc) { %> 
 
           <% if(doc.type == 'article') { %> 
 
