@@ -57,7 +57,7 @@ exports.productDetail = prismic.route(function(req, res, ctx) {
       slug = req.params['slug'];
 
   // Retrieve the product document
-  prismic.getDocument(ctx, id, slug, 
+  prismic.getDocument(ctx, id, slug,
     function(err, product) {
       if (err) { prismic.onPrismicError(err, req, res); return; }
 
@@ -69,7 +69,7 @@ exports.productDetail = prismic.route(function(req, res, ctx) {
           if(link.document.type == "product" && !link.isBroken) {
             return link.document.id;
           }
-        }).filter(function(link) { return link; })).value(), 
+        }).filter(function(link) { return link; })).value(),
 
         // Then
         function(err, relatedProducts) {
@@ -103,7 +103,7 @@ exports.selectionDetail = prismic.route(function(req, res, ctx) {
       slug = req.params['slug'];
 
   // Retrieve the selection document
-  prismic.getDocument(ctx, id, slug, 
+  prismic.getDocument(ctx, id, slug,
     function(err, selection) {
 
       if (err) { prismic.onPrismicError(err, req, res); return; }
@@ -118,7 +118,7 @@ exports.selectionDetail = prismic.route(function(req, res, ctx) {
             if(link.document.type == "product" && !link.isBroken) {
               return link.document.id;
             }
-          }).filter(function(link) { return link; })).value(), 
+          }).filter(function(link) { return link; })).value(),
 
           // Then
           function(err, products) {
@@ -152,8 +152,8 @@ exports.selectionDetail = prismic.route(function(req, res, ctx) {
 exports.about = prismic.route(function(req, res, ctx) {
 
   // Get the bookmarked document
-  prismic.getBookmark(ctx, 'about', function(page) {
-
+  prismic.getBookmark(ctx, 'about', function(err, page) {
+    if (err) { prismic.onPrismicError(err, req, res); return; }
     res.render('about', {
       page: page,
       menu: 'about'
@@ -196,7 +196,7 @@ exports.storeDetail = prismic.route(function(req, res, ctx) {
       slug = req.params['slug'];
 
   // Retrieve the store document
-  prismic.getDocument(ctx, id, slug, 
+  prismic.getDocument(ctx, id, slug,
     function(err, store) {
 
       if (err) { prismic.onPrismicError(err, req, res); return; }
@@ -255,7 +255,7 @@ exports.jobDetail = prismic.route(function(req, res, ctx) {
         slug = req.params['slug'];
 
     // Retrieve the job document
-    prismic.getDocument(ctx, id, slug, 
+    prismic.getDocument(ctx, id, slug,
       function(err, job) {
 
         if (err) { prismic.onPrismicError(err, req, res); return; }
