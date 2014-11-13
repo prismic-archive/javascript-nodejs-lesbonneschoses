@@ -15,20 +15,17 @@
 
   </head>
   <body>
-
-    <%- partial('toolbar') %>
-
     <header>
 
-      <a href="/<%= ctx.maybeRef ? '?ref=' + ctx.maybeRef : '' %>">
+      <a href="/">
         <h1>Les Bonnes Choses</h1>
       </a>
 
       <nav>
         <ul>
-          <li><a href="/blog<%= ctx.maybeRef ? '?ref=' + ctx.maybeRef : '' %>">Home</a></li>
+          <li><a href="/blog">Home</a></li>
           <% _(categories).map(function(category) { %> 
-            <li><a href="/blog/categories/<%= category %><%= ctx.maybeRef ? '?ref=' + ctx.maybeRef : '' %>"><%= category %></a></li>
+            <li><a href="/blog/categories/<%= category %>"><%= category %></a></li>
           <% }); %>
         </ul>
       </nav>
@@ -39,10 +36,6 @@
 
     <footer>
       This is a demonstration website for <a href="http://prismic.io">prismic.io</a> 
-
-      <% if(!ctx.oauth().hasPrivilegedAccess) { %>
-        – Please <a href="/#signin">sign in</a> to preview your changes.
-      <% } %>
     </footer>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
@@ -50,5 +43,6 @@
     <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 
     <script src="/javascripts/modernizr-2.6.2.min.js"></script>
+    <script src="https://static.cdn.prismic.io/prismic.min.js"></script>
   </body>
 </html>

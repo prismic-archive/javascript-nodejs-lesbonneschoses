@@ -111,23 +111,6 @@ body {
   overflow-x: hidden; 
 }
 
-body.toolbar {
-  position: relative;
-  padding-top: 40px;
-}
-
-#toolbar form {
-  width: 100% !important;
-}
-
-#toolbar form:first-child {
-  margin-left: 20px;
-}
-
-#toolbar form:last-child {
-  right: 20px;
-}
-
 header {
   position: fixed;
   left: 0;
@@ -137,10 +120,6 @@ header {
   border-right: 1px solid #ddd;
   text-align: center;
   padding: 30px 0;
-}
-
-body.toolbar header {
-  top: 40px;
 }
 
 header > a {
@@ -317,6 +296,75 @@ footer a {
   font-size: .95em;
   text-align: justify;
   margin-bottom: 50px;
+}
+
+#post article p.image-caption {
+  font-style: italic;
+  color: #aaa;
+  font-size: 0.85em;
+  text-align: center;
+  margin: -45px 40px 30px 40px;
+}
+
+#post article p.tip {
+  position: relative;
+  color: #c09853;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  background-color: #fcf8e3;
+  border: 1px solid #fbeed5;
+  padding: 30px 15px 15px 15px;
+  border-radius: 3px;
+  margin: 30px 0;
+}
+
+#post article p.tip::before {
+  content: "Chef's tip";
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: #c09853;
+  color: #fff;
+  padding: 2px 15px;
+  font-size: 10px;
+  text-shadow: none;
+  border-radius: 3px 0 0 0;
+}
+
+#post article p.quote {
+  border-left: 5px solid #eee;
+  padding: 0.5em 10px;
+  font-family: Serif;
+  font-style: italic;
+  font-size: 1.1em;
+}
+
+#post article p.quote::before {
+  content: open-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  margin-left: -10px;
+  vertical-align: -0.4em;
+  color: #eee;
+  font-style: italic;
+  font-family: Sans;
+}
+
+#post article p.quote span.author {
+  display: block;
+  margin-top: 1em;
+  font-size: 0.8em; 
+  font-family: Sans;
+  font-style: normal;
+}
+
+#post article p.quote span.author::before {
+  content: '– ';
+}
+
+#post article p span.job-title {
+  border-bottom: 1px dashed #aaa;
+  color: #444;
 }
 
 #post h1 {

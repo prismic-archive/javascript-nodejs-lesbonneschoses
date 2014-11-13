@@ -31,7 +31,7 @@
     </div>
 
     <p>
-      <a href="/products<%= ctx.maybeRef ? '?ref=' + ctx.maybeRef : '' %>">Browse all our products</a>
+      <a href="/products">Browse all our products</a>
     </p>
 
   </section>
@@ -70,7 +70,7 @@
     
     <section id="blog">
 
-      <h2>Fresh news from <a href="/blog<%= ctx.maybeRef ? '?ref=' + ctx.maybeRef : '' %>">our blog</a></h2>
+      <h2>Fresh news from <a href="/blog">our blog</a></h2>
 
       <a href="<%= ctx.linkResolver(ctx, post) %>">
         <h1><%= post.getStructuredText('blog-post.body').getTitle().text %></h1>

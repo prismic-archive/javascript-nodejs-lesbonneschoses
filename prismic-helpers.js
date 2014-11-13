@@ -46,99 +46,29 @@ exports.getBookmark = function(ctx, bookmark, callback) {
 exports.onPrismicError = Configuration.onPrismicError;
 
 // -- Route wrapper that provide a "prismic context" to the underlying function
-
 exports.route = function(callback) {
   return function(req, res) {
-    exports.getApiHome(req.session['ACCESS_TOKEN'], function(err, Api) {
+    exports.getApiHome(Configuration.accessToken, function(err, Api) {
       if (err) { exports.onPrismicError(err, req, res); return; }
-      var ref = req.query['ref'] || Api.master(),
+      var ref = req.cookies[Prismic.previewCookie] || Api.master(),
           ctx = {
             api: Api,
             ref: ref,
-            maybeRef: ref == Api.master() ? undefined : ref,
-
-            oauth: function() {
-              var token = req.session['ACCESS_TOKEN'];
-              return {
-                accessToken: token,
-                hasPrivilegedAccess: !!token
-              }
-            },
-
-            linkResolver: function(ctx, doc) {
-              return Configuration.linkResolver(ctx, doc);
-            }
+            maybeRef: ref == Api.master() ? undefined : ref
           };
+      ctx.linkResolver = Configuration.linkResolver(ctx);
       res.locals.ctx = ctx;
       callback(req, res, ctx);
     });
   };
 };
 
-// -- OAuth routes
-
-var redirectUri = function(req) {
-  return req.protocol + '://' + req.get('Host') + '/auth_callback';
-};
-
-exports.signin = function(req, res) {
-  exports.getApiHome(undefined, function(err, Api) {
-    if (err) { exports.onPrismicError(err, req, res); return; }
-    var endpointSpec = url.parse(Api.data.oauthInitiate);
-
-    endpointSpec.query = endpointSpec.query || {};
-    endpointSpec.query['client_id'] = Configuration.clientId;
-    endpointSpec.query['redirect_uri'] = redirectUri(req);
-    endpointSpec.query['scope'] = 'master+releases';
-
-    res.redirect(301, url.format(endpointSpec));
+// -- Preview endpoint
+exports.preview = exports.route(function(req, res, ctx) {
+  var previewToken = req.query['token'];
+  ctx.api.previewSession(previewToken, ctx.linkResolver, '/', function(err, redirectUrl) {
+    res.cookie(Prismic.previewCookie, previewToken, { maxAge: 1000 * 60 * 30, path: '/', httpOnly: false });
+    res.redirect(redirectUrl);
   });
-};
-
-exports.authCallback = function(req, res) {
-  exports.getApiHome(undefined, function(err, Api) {
-    if (err) { exports.onPrismicError(err, req, res); return; }
-    var endpointSpec = url.parse(Api.data.oauthToken),
-        h = endpointSpec.protocol == 'https:' ? https : http,
-        postData = querystring.stringify({
-          'grant_type' : 'authorization_code',
-          'code': req.query['code'],
-          'redirect_uri': redirectUri(req),
-          'client_id': Configuration.clientId,
-          'client_secret': Configuration.clientSecret
-        });
-
-    var postOptions = endpointSpec;
-    postOptions.method = 'POST';
-    postOptions.headers = {
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'Content-Length': postData.length
-    };
-
-    var postRequest = h.request(postOptions, function(response) {
-      var jsonStr = '';
-
-      response.setEncoding('utf8');
-      response.on('data', function (chunk) {
-        jsonStr += chunk;
-      });
-
-      response.on('end', function () {
-        var accessToken = JSON.parse(jsonStr)['access_token'];
-        if(accessToken) {
-          req.session['ACCESS_TOKEN'] = accessToken;
-        }
-        res.redirect(301, '/');
-      });
-    });
-
-    postRequest.write(postData);
-    postRequest.end();
-  });
-};
-
-exports.signout = function(req, res) {
-  delete req.session['ACCESS_TOKEN'];
-  res.redirect(301, '/');
-};
+})
 

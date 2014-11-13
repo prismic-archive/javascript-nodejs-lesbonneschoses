@@ -56,10 +56,7 @@ app.get('/blog', blogRoutes.posts);
 app.get('/blog/categories/:category', blogRoutes.posts);
 app.get('/blog/posts/:id/:slug', blogRoutes.postDetail);
 
-// OAuth - Routes
-app.get('/signin', prismic.signin);
-app.get('/auth_callback', prismic.authCallback);
-app.post('/signout', prismic.signout);
+app.get('/preview', prismic.preview);
 
 var PORT = process.env.PORT || 3000;
 
