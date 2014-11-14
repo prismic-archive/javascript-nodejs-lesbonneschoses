@@ -67,7 +67,7 @@ exports.route = function(callback) {
 exports.preview = exports.route(function(req, res, ctx) {
   var previewToken = req.query['token'];
   ctx.api.previewSession(previewToken, ctx.linkResolver, '/', function(err, redirectUrl) {
-    res.cookie(Prismic.previewCookie, previewToken, { maxAge: 1000 * 60 * 30, path: '/', httpOnly: false });
+    res.cookie(Prismic.previewCookie, previewToken, { maxAge: 60 * 30, path: '/', httpOnly: false });
     res.redirect(redirectUrl);
   });
 })
