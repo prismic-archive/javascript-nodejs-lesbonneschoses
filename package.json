@@ -9,7 +9,7 @@
     "express": "3.4.1",
     "ejs": "*",
     "ejs-locals": "~1.0.2",
-    "prismic.io": "~1.0.24",
+    "prismic.io": "~1.0.29",
     "underscore": "~1.5.2",
     "numeral": "~1.5.1",
     "moment": "~2.3.1"
